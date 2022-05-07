@@ -9,7 +9,5 @@ public class main {
 		B.insertRow(new double[] {3,-4});
 		// Multiply
 		System.out.println(MatrixOperation.multiply(A, B)+"\n");
-		// Scalar Multiply
-		System.out.println(MatrixOperation.multiply(A, 2d)+"\n");
 	}
 }
