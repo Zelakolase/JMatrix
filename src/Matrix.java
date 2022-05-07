@@ -1,7 +1,16 @@
 import java.util.ArrayList;
 public class Matrix {
 	//        Row       Values in rows
-	private ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
+	private ArrayList<ArrayList<Double>> matrix = new ArrayList<>();
+	private int MAX_ROWS = 0;
+	private int MAX_COLS = 0;
+	/**
+	 * Constructor for class, sets a limit for the matrix size
+	 */
+	public Matrix(int row, int column) {
+		MAX_COLS = column;
+		MAX_ROWS = row;
+	}
 	/**
 	 * Gets number of rows
 	 * @return number of rows
@@ -21,15 +30,19 @@ public class Matrix {
 	 * Inserts a new row with the values
 	 * @param values data to be inserted
 	 */
-	public void insertRow(int[] values) {
-		matrix.add(new ArrayList<Integer>() {
+	public void insertRow(double[] values) {
+		if(values.length == MAX_COLS && matrix.size() <= MAX_ROWS) {
+		matrix.add(new ArrayList<Double>() {
 			{
-				for(int value : values) {
+				for(double value : values) {
 					add(value);
 				}
 			}
 		}
 			);
+		}else {
+			throw new UnsupportedOperationException();
+		}
 	}
 	/**
 	 * Gets a value using row and column number
@@ -37,33 +50,33 @@ public class Matrix {
 	 * @param column target column num.
 	 * @return value of that position
 	 */
-	public int get(int row, int column) {
+	public double get(int row, int column) {
 		return matrix.get(row).get(column);
 	}
 	/**
 	 * Gets an entire row
 	 */
-	public ArrayList<Integer> getRow(int index) {
+	public ArrayList<Double> getRow(int index) {
 		return matrix.get(index);
 	}
 	/**
 	 * Gets an entire column
 	 */
-	public ArrayList<Integer> getColumn(int index) {
-		ArrayList<Integer> column = new ArrayList<Integer>();
-		for(ArrayList<Integer> row : matrix) {
+	public ArrayList<Double> getColumn(int index) {
+		ArrayList<Double> column = new ArrayList<>();
+		for(ArrayList<Double> row : matrix) {
 			column.add(row.get(index));
 		}
 		return column;
 	}
 	/**
 	 * To string overrided func.
-	 * @return 
+	 * @return the string representation of the matrix
 	 */
 	@Override
 	public String toString() {
 		String out = "";
-		for(ArrayList<Integer> row : matrix) {
+		for(ArrayList<Double> row : matrix) {
 			System.out.println(row.toString()
 					.replaceFirst("\\[", "")
 					.replaceFirst("\\]", ""));
